@@ -8,12 +8,12 @@ import Image from 'next/image';
 import React, { useCallback, useState } from 'react';
 
 import { LinkButton } from '@components';
-import { IS_REGISTRATION_OPEN } from '@utils/mentorshipConstants';
 import { useIsMobile } from '@utils/theme-utils';
 import { Mentor, Network } from '@utils/types';
 
 type MentorProfileCardProps = {
   mentor: Mentor;
+  registrationOpen: boolean;
 };
 
 // questions: what networks are available? medium doesn't have an icon
@@ -53,6 +53,7 @@ const FALLBACK_IMAGE = '/profile-illustration-female-fallback.jpg';
 
 export const MentorProfileCard: React.FC<MentorProfileCardProps> = ({
   mentor,
+  registrationOpen,
 }) => {
   const [tab, setTab] = useState(0);
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) =>
@@ -137,7 +138,7 @@ export const MentorProfileCard: React.FC<MentorProfileCardProps> = ({
           href={`/mentorship/mentee-registration?id=${mentor.id}`}
           reversed
           small
-          disabled={!IS_REGISTRATION_OPEN}
+          disabled={!registrationOpen}
         >
           Apply for this mentor{' '}
         </LinkButton>
